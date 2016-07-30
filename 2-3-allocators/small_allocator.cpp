@@ -3,10 +3,11 @@
 
 #define DK_MAX 1048576
 typedef unsigned int stp_size;
+typedef unsigned char byte;
 
 class SmallAllocator {
 private:
-        char memory[DK_MAX];
+        byte memory[DK_MAX];
 		stp_size allocated;
 		stp_size num_blocks;
 		
@@ -30,7 +31,7 @@ public:
         };
 		
         void *ReAlloc(void *ptr, stp_size size) {
-			stp_size* old_size = (stp_size*)(ptr - sizeof(stp_size));
+			stp_size* old_size = (stp_size*)((byte*)ptr - sizeof(stp_size));
 			void* new_ptr = Alloc(size);
 			
 			std::memcpy(new_ptr, ptr, *old_size);
@@ -43,7 +44,7 @@ public:
 		
         void Free(void *ptr) {
 			num_blocks--;
-        	stp_size* sz = (stp_size*)(ptr - sizeof(stp_size));
+        	stp_size* sz = (stp_size*)((byte*)ptr - sizeof(stp_size));
 			*sz = 0;
 			dump();
         };
