@@ -44,7 +44,6 @@ public:
         void Free(void *ptr) {
 			num_blocks--;
         	stp_size* sz = (stp_size*)(ptr - sizeof(stp_size));
-			allocated -= *sz + sizeof(stp_size);
 			*sz = 0;
 			dump();
         };
