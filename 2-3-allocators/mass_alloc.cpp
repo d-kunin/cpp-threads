@@ -3,7 +3,7 @@
 #include <sys/time.h>
 
 // LD_PRELOAD="libtcmalloc.so.4" HEAPCHECK=normal ./mass_alloc
-
+//  LD_PRELOAD="libjemalloc.so.1" ./mass_alloc
 int main(int argc, char ** argv) {
 	struct timeval t1, t2, t3;
 	gettimeofday(&t1, NULL);
